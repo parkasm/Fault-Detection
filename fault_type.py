@@ -1,5 +1,4 @@
-# The fault type is determined from the fault current phasors using the logic based on R Das Paper (Page 43)
-# These are temporary value. In reality these number will be provided by user or fed from a file
+# The fault type is determined from the fault current phasors using the logic based on Ratan Das Paper (Page 43)
 
 
 """Dictionary for the fault type and their respective return values
@@ -17,14 +16,20 @@ faultdict =	{
   "A-B-C-G" : "10"
 }"""
 
+# Function defined to get the fault type. The Input to the function are the magnitude of the current for all three phases at the measuring point
 def fault_type(I_a, I_b, I_c):
 
     ##I_a = float(input("Enter Phase A current at measuring point: "))
     ##I_b = float(input("Enter Phase B current at measuring point: "))
     ##I_c = float(input("Enter Phase C current at measuring point: "))
+    
+    # Threshold current. The Value for this needs to come from either the utility company or have to be calculated somehow.  
     I_threshold = 150
+
+    # Zero sequence component of the line currents.
     I_zero = (I_a + I_b + I_c)/3
 
+    ## These conditional statements contains the logic to determine the type. Quantities involved are the current phasors, threshold current and the zero sequence current
     if abs(I_a) > abs(I_threshold):
         if abs(I_b) > abs(I_threshold):
             if abs(I_c) > abs(I_threshold):
