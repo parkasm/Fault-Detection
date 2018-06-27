@@ -1,13 +1,19 @@
-from fault_type import fault_type
+##STEPS TO COMPLETE BEFORE RUNNING THIS SCRIPT
+# STEP 1 : HAVE THE EXCEL DATA READY AND UPDATED WITH CURRENT AND VOLTAGE NUMBERS
+# STEP 2 : HAVE THE CURRENT MAGNITUDES AND THE THRESHOLD CURRENT VALUES. UPDATE THE FAULT_TYPE SCRIPT WITH THE THRESHOLD CURRENT VALUE 
+# STEP 3 : RUN THIS SCRIPT. PASS THOSE CURRENT MAGNITUDES IN LINE 14 TO FAULT TYPE FUNCTION. PLAN IS TO RUN THIS SCRIPT DIRECTLY WITHOUT PASSING IN ANY ARGUMENTS
+
+
+from fault_type import fault_type # this is importing the fault type function from the fault type file
 import xlrd
 import panda
 import numpy as np
 import cmath
 import math
 import sys
-##f = fault_type(130,140,180)
+f = fault_type(279.6,246.9,145.2)
 ## Different values of f corresponds to different kind of faults. There is a dictionary created in fault_type.py file to look into details of the values of f
-f = 10
+#f = 10
 
 # This is the core function which outputs the section containing the fault. The input for this function are the Modified Reactance for a single section of distribution line and the apparent reactance from the kind of fault.  |
 # The modified reactance equations can be found in the Ratan Das Paper. If the Modified Reactance for a section is less than the Apparent Reactance, which means the fault is not in that section and look for the fault in the next sections. 
@@ -107,7 +113,7 @@ print(val1) """
 
 # Small check to make sure that there are equal number of current and voltage phasors in the excel sheets otherwise there is something wrong
 if(Voltage_SpreadSheet.nrows == Current_SpreadSheet.nrows):
-    #Loop through all the different iterations to get the apparent reactance
+    #Loop through all the iterations of the voltage/current phasors to get the apparent reactance for each of them
     for i in range(0,Voltage_SpreadSheet.nrows):
             if f == 0 :
                 print('There is no fault')

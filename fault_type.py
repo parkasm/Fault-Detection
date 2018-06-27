@@ -24,7 +24,7 @@ def fault_type(I_a, I_b, I_c):
     ##I_c = float(input("Enter Phase C current at measuring point: "))
     
     # Threshold current. The Value for this needs to come from either the utility company or have to be calculated somehow.  
-    I_threshold = 150
+    I_threshold = 242.6
 
     # Zero sequence component of the line currents.
     I_zero = (I_a + I_b + I_c)/3
